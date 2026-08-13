@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/assets/hevox-agent.png" width="450" alt="Hevox Agent">
+  <img src="assets/hevox-agent.png" width="450" alt="Hevox Agent">
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@ It provides secure communication between the **Hevox Panel** and your nodes, han
 > The Hevox Agent source code is maintained in a private repository.
 
 <p align="center">
-  <img src=".github/assets/hevox-preview.png" width="900" alt="Hevox Agent">
+  <img src="assets/hevox-preview.png" width="900" alt="Hevox Agent">
 </p>
 
 ## Installation
@@ -58,7 +58,7 @@ Pre-built Debian packages are available from the [Releases](https://github.com/b
 ---
 
 <p align="center">
-  <img src=".github/assets/hevox-logo.png" width="70" alt="Hevox">
+  <img src="assets/hevox-logo.png" width="70" alt="Hevox">
 </p>
 
 <p align="center">
