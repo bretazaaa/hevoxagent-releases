@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-# Hevox Agent installer — public, no GitHub account or authentication
-# required. Fetches the latest .deb from this repository's releases
-# (built and published by CI from the private source repository) and
-# installs it.
-#
-# Usage:
-#   curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash
-#   curl -sSL .../install.sh | sudo bash -s -- --panel https://panel.example.com
+
 set -euo pipefail
 
 REPO="bretazaaa/hevoxagent-releases"
