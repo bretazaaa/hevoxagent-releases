@@ -26,9 +26,6 @@ It provides secure communication between the **Hevox Panel** and your nodes, han
 > This repository contains **compiled releases only**.
 > The Hevox Agent source code is maintained in a private repository.
 
-<p align="center">
-  <img src="assets/hevox-preview.png" width="900" alt="Hevox Agent">
-</p>
 
 ## Installation
 
