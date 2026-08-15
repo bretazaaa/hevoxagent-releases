@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="assets/hevox-agent.png" width="450" alt="Hevox Agent">
+  <img src="assets/hevox-agent.png" width="600" alt="Hevox Agent">
 </p>
 
 <p align="center">
-  <strong>The lightweight node agent powering the Hevox ecosystem.</strong>
+  <strong>Lightweight node agent for the Hevox game server management platform.</strong>
 </p>
 
 <p align="center">
@@ -19,61 +19,95 @@
 
 ## About
 
-**Hevox Agent** is the node-side service used by Hevox to manage and monitor game server infrastructure.
+**Hevox Agent** connects Linux nodes to **Hevox Panel**.
 
-It provides secure communication between the **Hevox Panel** and your nodes, handling server operations, monitoring and infrastructure tasks.
+It provides secure communication, system monitoring and workload management across your infrastructure.
 
-> This repository contains **compiled releases only**.
-> The Hevox Agent source code is maintained in a private repository.
+A Hevox node can run a **single dedicated server** or **multiple game servers**, depending on your infrastructure and isolation requirements.
 
+<p align="center">
+  <img src="assets/hevox-preview.png" width="900" alt="Hevox Infrastructure">
+</p>
+
+## Architecture
+
+Hevox Agent runs natively on each managed Linux node.
+
+```text
+Hevox Panel
+     │
+     │ API
+     ▼
+Hevox Agent
+     │
+     └── Node
+          ├── Game Server
+          ├── Game Server
+          └── Game Server
+```
+
+Nodes can be deployed in different ways:
+
+* **All-in-One** — Panel, Agent and game servers on the same machine.
+* **Shared Node** — One Agent managing multiple game servers.
+* **Dedicated Node** — One VM/LXC, one Agent and one isolated game server.
+
+Hevox Agent itself runs as a native Linux service. Containerization may be used as a runtime for workloads when required.
 
 ## Installation
 
-Install the latest version with:
+Install the latest version:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash
 ```
 
-The installer automatically downloads and installs the latest available release.
-
-The installer detects whether this is a first install, an update, or
-whether you're already on the latest version, and shows a short branded
-summary either way — full `apt`/`dpkg`/`curl` output is logged to
-`/var/log/hevoxagent/install.log` but hidden from the terminal by
-default. An update never touches an existing `/etc/hevoxagent/config.yml`
-or `/var/lib/hevoxagent/identity.json` — pairing state always survives
-an update.
-
-## Update
-
-Run the installation command again to update Hevox Agent to the latest
-version.
-
-## Advanced usage
-
-`curl | sudo bash` can't take flags directly — pass them after `-s --`:
+Then pair the Agent with your Hevox Panel:
 
 ```bash
-# Show full apt/dpkg/curl/systemctl output as it runs, in addition to
-# logging it. Useful for diagnosing a failed install/update.
-curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash -s -- --verbose
-
-# Pair with a panel and start the service automatically once installed
-# (first install only).
-curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash -s -- --panel http://your-panel:8080
+hevoxagent pair --panel https://your-panel.example.com
 ```
 
-## Releases
+Once paired:
 
-Pre-built Debian packages are available from the [Releases](https://github.com/bretazaaa/hevoxagent-releases/releases) page.
+```bash
+sudo systemctl start hevoxagent
+```
+
+## Updating
+
+Run the installer again:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash
+```
+
+The installer automatically detects and installs the latest available version while preserving the Agent configuration and identity.
 
 ## Requirements
 
 * Linux
 * Debian / Ubuntu based distribution
 * Root or sudo access
-* Network access to your Hevox Panel
+* Network access to Hevox Panel
+
+## Releases
+
+This repository contains **compiled Hevox Agent releases only**.
+
+The source code is maintained in a private repository.
+
+Pre-built packages are available from the [Releases](https://github.com/bretazaaa/hevoxagent-releases/releases) page.
+
+## Project Status
+
+> Hevox Agent is currently under active development.
+
+APIs, configuration and installation methods may change before the first stable release.
+
+## License
+
+See [LICENSE](LICENSE) for more information.
 
 ---
 
