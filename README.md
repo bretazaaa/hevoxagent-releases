@@ -37,9 +37,32 @@ curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/i
 
 The installer automatically downloads and installs the latest available release.
 
+The installer detects whether this is a first install, an update, or
+whether you're already on the latest version, and shows a short branded
+summary either way — full `apt`/`dpkg`/`curl` output is logged to
+`/var/log/hevoxagent/install.log` but hidden from the terminal by
+default. An update never touches an existing `/etc/hevoxagent/config.yml`
+or `/var/lib/hevoxagent/identity.json` — pairing state always survives
+an update.
+
 ## Update
 
-Run the installation command again to update Hevox Agent to the latest version.
+Run the installation command again to update Hevox Agent to the latest
+version.
+
+## Advanced usage
+
+`curl | sudo bash` can't take flags directly — pass them after `-s --`:
+
+```bash
+# Show full apt/dpkg/curl/systemctl output as it runs, in addition to
+# logging it. Useful for diagnosing a failed install/update.
+curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash -s -- --verbose
+
+# Pair with a panel and start the service automatically once installed
+# (first install only).
+curl -sSL https://raw.githubusercontent.com/bretazaaa/hevoxagent-releases/main/install.sh | sudo bash -s -- --panel http://your-panel:8080
+```
 
 ## Releases
 
